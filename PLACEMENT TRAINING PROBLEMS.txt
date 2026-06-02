@@ -1,0 +1,27 @@
+PLACEMENT TRAINING PROBLEMS:
+
+LEETCODE LEMONADE PROBLEM(860):
+
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        count = 0
+        c = 0
+        for i in bills:
+            if i == 5:
+                count += 1
+            if i == 10:
+                if count > 0:
+                    count -= 1
+                    c += 1
+                else:
+                    return False
+            if i == 20:
+                if c > 0 and count > 0:
+                    count -= 1
+                    c -= 1
+
+                elif count >= 3:
+                    count -= 3
+                else:
+                    return False
+        return True                
