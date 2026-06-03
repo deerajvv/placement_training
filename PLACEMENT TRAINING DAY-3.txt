@@ -1,0 +1,44 @@
+PLACEMENT TRAINING DAY-3:
+
+1)SINGLE NUMBER(136):
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        x=0
+        for i in nums:
+            x=x^i
+        return x
+
+2)MISSING NUMBER(268):
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        s1=0
+        s=sum(nums)
+        l=len(nums)
+        s1=l*(l+1)//2
+        m=s1-s
+        return m
+
+3)POWER OF TWO(231):
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n<1:
+            return False
+        
+        if n&(n-1)==0:
+            return True
+        else:
+            return False
+            
+4)JUMP GAME(55):
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        petrol=0
+        for p in nums:
+            if petrol<0:
+                return False
+            elif p>petrol:
+                petrol=p
+            petrol-=1
+        return True
+            
