@@ -1,0 +1,96 @@
+DAY 7:
+
+79)class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def possible(board,i,j,k):
+            if k==len(word):
+                return True
+            if i<0 or i>=len(board) or j<0 or j>=len(board[0]) or board[i][j]!=word[k]:
+                return False
+            temp=board[i][j]
+            board[i][j]="#"
+            if possible(board,i-1,j,k+1) or possible(board,i+1,j,k+1) or possible(board,i,j-1,k+1) or possible(board,i,j+1,k+1):
+                return True
+            board[i][j]=temp
+            return False
+
+                
+        
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if possible(board,i,j,0):
+                    return True
+        return False
+  
+
+HW-17
+
+844)class Solution:
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        def cs(s):
+            st=[]
+            for i in s:
+                if i!="#":
+                    st.append(i)
+                else:
+                    if st:
+                        st.pop()
+            return "".join(st)
+        one=cs(s)
+        two=cs(t)
+        return one==two
+71)class Solution:
+    def simplifyPath(self, path: str) -> str:
+        a=path.split("/")
+        st=[]
+        for i in a:
+            if i=="" or i==".":
+                continue
+            if i=="..":
+                if st:
+                    st.pop()
+            else:
+                st.append(i)
+        return "/"+"/".join(st)
+1700)
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        n=len(students)
+        while students and sandwiches and sandwiches[0] in students:
+            if students[0]!=sandwiches[0]:
+                students.append(students.pop(0))
+            else:
+                n-=1
+                students.pop(0)
+                sandwiches.pop(0)
+        return n
+
+496)class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        d={}
+        stack=[]
+        for curr in nums2:
+            while stack and stack[-1]<curr:
+                ele=stack.pop()
+                d[ele]=curr
+            stack.append(curr)
+        while stack:
+            d[stack.pop()]=-1
+        res=[]
+        for i in nums1:
+            res.append(d[i])
+        return res
+
+739)class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        stack=[]
+        n=len(temperatures)
+        res=[0]*n
+        for i in range(n-1,-1,-1):
+            while stack and temperatures[i]>=temperatures[stack[-1]]:
+                stack.pop()
+            if stack:
+                res[i]=stack[-1]-i
+            stack.append(i)
+        return res
+
