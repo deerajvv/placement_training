@@ -1,0 +1,106 @@
+day 8
+876)# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        fast=head
+        slow=head
+        while fast!=None and fast.next!=None:
+            fast=fast.next.next
+            slow=slow.next
+        return slow
+
+141)# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        fast=head
+        slow=head
+        while fast!=None and fast.next!=None:
+            fast=fast.next.next
+            slow=slow.next
+        return slow
+
+142)# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        fast=head
+        slow=head
+        while fast and fast.next:
+            fast=fast.next.next
+            slow=slow.next
+            if fast==slow:
+                fast=head
+                while fast!=slow:
+                    fast=fast.next
+                    slow=slow.next
+                return slow
+        return None
+19)class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        slow=head
+        fast=head
+        for i in range(n):
+            fast=fast.next
+        if fast is None:
+            return head.next
+        while fast and fast.next:
+            fast=fast.next
+            slow=slow.next
+        slow.next=slow.next.next
+        return head
+
+21)# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy=ListNode()
+        list3=dummy
+        res=dummy
+        while list1 and list2:
+            if list1.val<list2.val:
+                list3.next=list1
+                list1=list1.next
+                list3=list3.next
+            else:
+                list3.next=list2
+                list2=list2.next
+                list3=list3.next
+        while list1:
+            list3.next=list1
+            list1=list1.next
+            list3=list3.next
+        while list2:
+            list3.next=list2
+            list2=list2.next
+            list3=list3.next
+        return res.next 
+206)# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr=head
+        prev=None
+        while curr:
+            temp=curr.next
+            curr.next=prev
+            prev=curr
+            curr=temp
+        return prev
