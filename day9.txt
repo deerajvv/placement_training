@@ -1,0 +1,258 @@
+DAY 9-
+
+hackerrank level order traversing
+
+class Node:
+    def __init__(self, info): 
+        self.info = info  
+        self.left = None  
+        self.right = None 
+        self.level = None 
+
+    def __str__(self):
+        return str(self.info) 
+
+class BinarySearchTree:
+    def __init__(self): 
+        self.root = None
+
+    def create(self, val):  
+        if self.root == None:
+            self.root = Node(val)
+        else:
+            current = self.root
+         
+            while True:
+                if val < current.info:
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = Node(val)
+                        break
+                elif val > current.info:
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = Node(val)
+                        break
+                else:
+                    break
+
+"""
+Node is defined as
+self.left (the left child of the node)
+self.right (the right child of the node)
+self.info (the value of the node)
+"""
+def levelOrder(root):
+    #Write your code here
+    q=[]
+    q.append(root)
+    while q:
+        ele=q.pop(0)
+        print(ele,end=" ")
+        if ele.left:
+            q.append(ele.left)
+        if ele.right:
+            q.append(ele.right)
+
+
+hackerrank:height of a binary tree:
+
+class Node:
+    def __init__(self, info): 
+        self.info = info  
+        self.left = None  
+        self.right = None 
+        self.level = None 
+
+    def __str__(self):
+        return str(self.info) 
+
+class BinarySearchTree:
+    def __init__(self): 
+        self.root = None
+
+    def create(self, val):  
+        if self.root == None:
+            self.root = Node(val)
+        else:
+            current = self.root
+         
+            while True:
+                if val < current.info:
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = Node(val)
+                        break
+                elif val > current.info:
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = Node(val)
+                        break
+                else:
+                    break
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+'''
+class Node:
+      def __init__(self,info): 
+          self.info = info  
+          self.left = None  
+          self.right = None 
+           
+
+       // this is a node of the tree , which contains info as data, left , right
+'''
+def height(root):
+    if root is None:
+        return -1
+    return 1+max(height(root.left),height(root.right))
+
+
+tree = BinarySearchTree()
+t = int(input())
+
+arr = list(map(int, input().split()))
+
+for i in range(t):
+    tree.create(arr[i])
+
+print(height(tree.root))
+
+
+hackerrank lowest common ancestor:
+
+class Node:
+    def __init__(self, info): 
+        self.info = info  
+        self.left = None  
+        self.right = None 
+        self.level = None 
+
+    def __str__(self):
+        return str(self.info) 
+
+class BinarySearchTree:
+    def __init__(self): 
+        self.root = None
+
+    def create(self, val):  
+        if self.root == None:
+            self.root = Node(val)
+        else:
+            current = self.root
+         
+            while True:
+                if val < current.info:
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = Node(val)
+                        break
+                elif val > current.info:
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = Node(val)
+                        break
+                else:
+                    break
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+'''
+class Node:
+      def __init__(self,info): 
+          self.info = info  
+          self.left = None  
+          self.right = None 
+           
+
+       // this is a node of the tree , which contains info as data, left , right
+'''
+
+def lca(root, v1, v2):
+  #Enter your code here
+    if root.info>v1 and root.info>v2:
+        return lca(root.left,v1,v2)
+    elif root.info<v1 and root.info<v2:
+        return lca(root.right,v1,v2)
+    else:
+        return root
+tree = BinarySearchTree()
+t = int(input())
+
+arr = list(map(int, input().split()))
+
+for i in range(t):
+    tree.create(arr[i])
+
+v = list(map(int, input().split()))
+
+ans = lca(tree.root, v[0], v[1])
+print (ans.info)
+
+
+hackerrank is this a binary tree:
+
+
+class node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def newNode():
+    temp = node(-1)
+    temp.left = None
+    temp.right = None
+    return(temp);
+
+""" Node is defined as
+class node:
+  def __init__(self, data):
+      self.data = data
+      self.left = None
+      self.right = None
+"""
+def check_binary_search_tree_(root):
+    res=[]
+    def inorder(root):
+        if root is None:
+            return 0
+        inorder(root.left)
+        res.append(root.data)
+        inorder(root.right)
+    inorder(root)
+    for i in range(len(res)-1):
+        if(res[i]>=res[i+1]):
+            return False
+    return True
+
+ht = int(input())
+cnt = 0
+values = map(int, input().split(' '))
+values = list(values)
+root  = newNode()
+def inorder(root, ht):
+    global cnt
+    global values
+    if cnt == len(values):
+        return
+    else:
+        if(ht>0):
+            root.left = newNode();
+            inorder(root.left, ht-1);
+        root.data = values[cnt];
+        cnt+=1
+        if(ht>0):
+            root.right = newNode();
+            inorder(root.right, ht-1);
+inorder(root, ht);
+if(check_binary_search_tree_(root)):
+    print("Yes")
+else:
+    print("No")
+
